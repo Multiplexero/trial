@@ -22,12 +22,12 @@ app.use(express.json());
 app.use(cookieParser());
 
 const corsOptions = {
-    origin:"https://tweet-nest-two.vercel.app/",
+    origin:"",
     methods:["POST","GET"],
     credentials:true
 }
-app.use(cors(corsOptions));// to tell that we are using this origin to send htttp request
-
+// app.use(cors(corsOptions));// to tell that we are using this origin to send htttp request
+app.use(cors());
 // api
 app.use("/api/v1/user",userRoute);
 app.use("/api/v1/tweet", tweetRoute);
