@@ -1,3 +1,4 @@
+import logo from '../assets/images/TweetNest-logo2.png';
 import React, { useState } from 'react';
 import axios from "axios";
 import { USER_API_END_POINT } from "../utils/constant";
@@ -16,15 +17,17 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const submitHandler = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); //preventing a form from submitting for Conditional Submission
     if (isLogin) {
       // login
       try {
+        //Axios provides a more feature-rich and user-friendly API for making HTTP requests compared to fetch(). 
         const res = await axios.post(`${USER_API_END_POINT}/login`, { email, password }, {
           headers: {
             'Content-Type': "application/json"
           },
           withCredentials: true
+          // When making cross-origin requests (requests to a different domain), the browser by default does not include cookies or other credentials. Setting withCredentials to true allows these credentials to be included in the request.
         }); 
         dispatch(getUser(res?.data?.user));
         if(res.data.success){
@@ -32,7 +35,7 @@ const Login = () => {
           toast.success(res.data.message);
         }
       } catch (error) {
-        toast.success(error.response.data.message);
+        toast.error(error.response.data.message);
         console.log(error);
       }
     } else {
@@ -49,7 +52,7 @@ const Login = () => {
           toast.success(res.data.message);
         }
       } catch (error) {
-        toast.success(error.response.data.message);
+        toast.error(error.response.data.message);
         console.log(error);
       }
     }
@@ -64,11 +67,11 @@ const Login = () => {
     <div className='w-screen h-screen flex items-center justify-center'>
       <div className='flex items-center justify-evenly w-[80%]'>
         <div>
-          <img className='ml-5' width={"300px"} src="https://www.edigitalagency.com.au/wp-content/uploads/new-Twitter-logo-x-black-png-1200x1227.png" alt="twitter-logo" />
+          <img className='ml-5' width={"700px"} src={logo} alt="TweetNest-logo" />
         </div>
         <div>
           <div className='my-5'>
-            <h1 className='font-bold text-6xl'>Happening now.</h1>
+            <h1 className='font-bold text-5xl'>Access Your Account.</h1>
           </div>
           <h1 className='mt-4 mb-2 text-2xl font-bold'>{isLogin ? "Login" : "Singup"}</h1>
           <form onSubmit={submitHandler} className='flex flex-col w-[55%]'>
@@ -79,7 +82,9 @@ const Login = () => {
               </>)
             }
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' className="outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold" />
+
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' className="outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold" />
+
             <button className='bg-[#1D9BF0] border-none py-2 my-4 rounded-full text-lg text-white'>{isLogin ? "Login" : "Create Account"}</button>
             <h1>{isLogin ? "Do not have an account?" : "Already have an account?"} <span onClick={loginSignupHandler} className='font-bold text-blue-600 cursor-pointer'>{isLogin ? "Signup" : "Login"}</span></h1>
           </form>

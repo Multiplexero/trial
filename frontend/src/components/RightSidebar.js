@@ -3,16 +3,16 @@ import { CiSearch } from "react-icons/ci";
 import Avatar from "react-avatar";
 import { Link } from 'react-router-dom';
 
-const RightSidebar = ({ otherUsers }) => {
+const RightSidebar = ({ otherUsers }) => { //get otherUsers as a prop
 
   return (
-    <div className='w-[25%]'>
+    <div className='w-[25%] overflow-y-auto'>
       <div className='flex items-center p-2 bg-gray-100 rounded-full outline-none w-full'>
         <CiSearch size="20px" />
         <input type="text" className='bg-transparent outline-none px-2' placeholder='Search' />
       </div>
       <div className='p-4 bg-gray-100 rounded-2xl my-4'>
-        <h1 className='font-bold text-lg'>Who to follow</h1>
+        <h1 className='font-bold text-2xl'>Other Users</h1>
         {
           otherUsers?.map((user) => {
             return (

@@ -9,7 +9,9 @@ import cors from "cors";
 dotenv.config({
     path:".env"
 })
-databaseConnection();
+
+//create server
+databaseConnection(); // connect to database
 const app = express(); 
 
 // middlewares
@@ -18,11 +20,13 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 app.use(cookieParser());
+
 const corsOptions = {
-    origin:"http://localhost:3000",
+    origin:"https://tweet-nest-two.vercel.app/",
+    methods:["POST","GET"],
     credentials:true
 }
-app.use(cors(corsOptions));
+app.use(cors(corsOptions));// to tell that we are using this origin to send htttp request
 
 // api
 app.use("/api/v1/user",userRoute);

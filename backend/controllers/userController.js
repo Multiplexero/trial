@@ -7,7 +7,7 @@ export const Register = async (req, res) => {
         const { name, username, email, password } = req.body;
         // basic validation
         if (!name || !username || !email || !password) {
-            return res.status(401).json({
+            return res.status(401).json({ //send staus code and json fromate body along with response
                 message: "All fields are required.",
                 success: false
             })
@@ -62,7 +62,10 @@ export const Login = async (req, res) => {
         const tokenData = {
             userId: user._id
         }
-        const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET, { expiresIn: "1d" });
+
+        //creates a new JWT
+        const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET, { expiresIn: "1d" }); 
+        // httpOnly: Ensures that the cookie cannot be accessed via client-side scripts
         return res.status(201).cookie("token", token, { expiresIn: "1d", httpOnly: true }).json({
             message: `Welcome back ${user.name}`,
             user,
@@ -134,14 +137,14 @@ export const follow = async(req,res)=>{
     try {
         const loggedInUserId = req.body.id; 
         const userId = req.params.id; 
-        const loggedInUser = await User.findById(loggedInUserId);//patel
-        const user = await User.findById(userId);//keshav
+        const loggedInUser = await User.findById(loggedInUserId); //jo follow krra
+        const user = await User.findById(userId); //jisko follow karna h
         if(!user.followers.includes(loggedInUserId)){
             await user.updateOne({$push:{followers:loggedInUserId}});
             await loggedInUser.updateOne({$push:{following:userId}});
         }else{
             return res.status(400).json({
-                message:`User already followed to ${user.name}`
+                message:`${loggedInUser.name} already followed to ${user.name}`
             })
         };
         return res.status(200).json({
@@ -156,8 +159,8 @@ export const unfollow = async (req,res) => {
     try {
         const loggedInUserId = req.body.id; 
         const userId = req.params.id; 
-        const loggedInUser = await User.findById(loggedInUserId);//patel
-        const user = await User.findById(userId);//keshav
+        const loggedInUser = await User.findById(loggedInUserId); //jo follow kr r
+        const user = await User.findById(userId); //jisko follow kr rha
         if(loggedInUser.following.includes(userId)){
             await user.updateOne({$pull:{followers:loggedInUserId}});
             await loggedInUser.updateOne({$pull:{following:userId}});

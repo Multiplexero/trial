@@ -6,13 +6,13 @@ import { getMyProfile } from "../redux/userSlice";
 
 const useGetProfile = (id) => {
     const dispatch = useDispatch();
-    useEffect(()=>{
+    useEffect(()=>{ //useEffect allows you to perform side effects in function components {such as data fetching, manually updating the DOM,setting up timers.}
         const fetchMyProfile = async () => {
             try {
                 const res = await axios.get(`${USER_API_END_POINT}/profile/${id}`,{
                     withCredentials:true
                 });
-                console.log(res);
+                //console.log(res);
                 dispatch(getMyProfile(res.data.user));
             } catch (error) {
                 console.log(error);

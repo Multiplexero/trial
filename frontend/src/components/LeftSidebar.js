@@ -1,3 +1,4 @@
+import logo from '../assets/images/TweetNest-logo2.png';
 import React from 'react';
 import { CiHome } from "react-icons/ci";
 import { CiHashtag } from "react-icons/ci";
@@ -32,12 +33,13 @@ const LeftSidebar = () => {
     }
 
     return (
-        <div className='w-[20%]'>
+        <div className='w-[20%] overflow-y-auto'>
             <div>
-                <div>
-                    <img className='ml-5' width={"24px"} src="https://www.edigitalagency.com.au/wp-content/uploads/new-Twitter-logo-x-black-png-1200x1227.png" alt="twitter-logo" />
+                <div className='flex bg-gray-100 items-center rounded-xl'>
+                    <img className='ml-1' width={"70px"} src={logo} alt="TweetNest-logo" />
+                    <div className='my-4 ml-3 text-2xl font-bold'>TweetNest</div>
                 </div>
-                <div className='my-4'>
+                <div className='mt-0 mb-4'>
                     <Link to="/" className='flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full'>
                         <div>
                             <CiHome size="24px" />
@@ -50,12 +52,12 @@ const LeftSidebar = () => {
                         </div>
                         <h1 className='font-bold text-lg ml-2'>Explore</h1>
                     </div>
-                    <div className='flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full'>
+                    {/* <div className='flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full'>
                         <div>
                             <IoIosNotificationsOutline size="24px" />
                         </div>
                         <h1 className='font-bold text-lg ml-2'>Notifications</h1>
-                    </div>
+                    </div> */}
                     <Link to={`/profile/${user?._id}`} className='flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full'>
                         <div>
                             <CiUser size="24px" />

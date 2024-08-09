@@ -27,6 +27,7 @@ export const createTweet = async (req, res) => {
 export const deleteTweet = async (req,res) => {
     try {
         const {id}  = req.params;
+        //req.params.id is used to access route parameters. Route parameters are part of the URL path and are specified in the route definition with a colon : prefix.
         await Tweet.findByIdAndDelete(id);
         return res.status(200).json({
             message:"Tweet deleted successfully.",
@@ -43,16 +44,17 @@ export const likeOrDislike = async (req,res) => {
         const tweetId = req.params.id;
         const tweet = await Tweet.findById(tweetId);
         if(tweet.like.includes(loggedInUserId)){
+            // if user already liked the tweet
             // dislike
             await Tweet.findByIdAndUpdate(tweetId,{$pull:{like:loggedInUserId}});
             return res.status(200).json({
-                message:"User disliked your tweet."
+                message:"Tweet disliked."
             })
         }else{
             // like
             await Tweet.findByIdAndUpdate(tweetId, {$push:{like:loggedInUserId}});
             return res.status(200).json({
-                message:"User liked your tweet."
+                message:"Tweet liked."
             })
         }
     } catch (error) {
@@ -65,6 +67,7 @@ export const getAllTweets = async (req,res) => {
         const id = req.params.id;
         const loggedInUser = await User.findById(id);
         const loggedInUserTweets = await Tweet.find({userId:id});
+        //Promise object allows you to handle multiple promises concurrently
         const followingUserTweet = await Promise.all(loggedInUser.following.map((otherUsersId)=>{
             return Tweet.find({userId:otherUsersId});
         }));

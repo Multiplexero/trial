@@ -31,5 +31,7 @@ const userSchema = new mongoose.Schema({
         type:Array,
         default:[]
     }
-},{timestamps:true});
+},{timestamps:true});//store time at which user create acount
+
+//create model
 export const User = mongoose.model("User", userSchema);

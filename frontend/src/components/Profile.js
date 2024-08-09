@@ -22,7 +22,7 @@ const Profile = () => {
             try {
                 axios.defaults.withCredentials = true;
                 const res = await axios.post(`${USER_API_END_POINT}/unfollow/${id}`, {id:user?._id});
-                console.log(res);
+               // console.log(res);
                 dispatch(followingUpdate(id));
                 dispatch(getRefresh());
                 toast.success(res.data.message);
@@ -36,7 +36,7 @@ const Profile = () => {
             try {
                 axios.defaults.withCredentials = true;
                 const res = await axios.post(`${USER_API_END_POINT}/follow/${id}`, {id:user?._id});
-                console.log(res);
+                //console.log(res);
                 dispatch(followingUpdate(id));
                 dispatch(getRefresh());
                 toast.success(res.data.message);
@@ -78,7 +78,8 @@ const Profile = () => {
                     <p>{`@${profile?.username}`}</p>
                 </div>
                 <div className='m-4 text-sm'>
-                    <p>🌐 Exploring the web's endless possibilities with MERN Stack 🚀 | Problem solver by day, coder by night 🌙 | Coffee lover ☕ | Join me on this coding journey!</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper eleifend. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In ac felis quis tortor malesuada pretium.
+                    !</p>
                 </div>
             </div>
         </div>

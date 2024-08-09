@@ -8,7 +8,7 @@ import useGetMyTweets from '../hooks/useGetMyTweets';
 
 
 const Home = () => {
-  const { user, otherUsers } = useSelector(store => store.user);
+  const { user, otherUsers } = useSelector(store => store.user); //useSelector allows you to extract data from the Redux store
   const navigate = useNavigate();
 
   useEffect(()=>{

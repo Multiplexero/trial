@@ -26,8 +26,10 @@ const rootReducer = combineReducers({
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
+//configureStore is part of Redux Toolkit, simplifying the setup of a Redux store
+//Features: Automatically combines reducers, sets up middleware
 const store = configureStore({
-    reducer:persistedReducer,
+    reducer:persistedReducer, //This helps maintain the state across page reloads.
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
